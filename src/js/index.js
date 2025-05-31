@@ -1,4 +1,3 @@
-// Implementa las Solicitudes con Fetch
 const fetchBtn = document.getElementById('fetch-btn');
 const dataContainer = document.getElementById('data-container');
 
@@ -6,7 +5,7 @@ fetchBtn.addEventListener('click', () => {
   fetch('https://rickandmortyapi.com/api/character')
     .then(response => {
       if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        throw new Error('Request Error');
       }
       return response.json();
     })
@@ -15,7 +14,7 @@ fetchBtn.addEventListener('click', () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      dataContainer.textContent = 'Hubo un error al obtener los datos.';
+      dataContainer.textContent = 'Error while getting data.';
     });
 });
 
@@ -29,7 +28,7 @@ axiosBtn.addEventListener('click', () => {
   })
   .catch(error => {
     console.error('Error:', error);
-    dataContainer.textContent = 'Hubo un error al obtener los datos.';
+    dataContainer.textContent = 'Error while getting data.';
   });
 });
 
