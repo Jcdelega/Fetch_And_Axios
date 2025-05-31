@@ -11,46 +11,60 @@ fetchBtn.addEventListener('click', () => {
       return response.json();
     })
     .then(data => {
-      // Completar: renderizar datos en el contenedor
-      // Pista: Usa `data.results` para iterar sobre los personajes obtenidos.
+      renderCharacters(data);
     })
     .catch(error => {
       console.error('Error:', error);
       dataContainer.textContent = 'Hubo un error al obtener los datos.';
     });
 });
-
-// Implementa las Solicitudes con Axios
-
-// 1. Instala Axios o inclúyelo mediante una CDN:
-//   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-// 2. Escribe una función que utilice Axios para obtener los datos y manejarlos de manera similar a `fetch`.
 
 const axiosBtn = document.getElementById('axios-btn');
 
 axiosBtn.addEventListener('click', () => {
   axios.get('https://rickandmortyapi.com/api/character')
-    .then(response => {
-      const data = response.data;
-      // Completar: renderizar datos en el contenedor
-      // Pista: Observa que Axios ya convierte la respuesta JSON, por lo que no necesitas usar `.json()`.
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      dataContainer.textContent = 'Hubo un error al obtener los datos.';
-    });
+  .then(response => {
+    const data = response.data;
+    renderCharacters(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    dataContainer.textContent = 'Hubo un error al obtener los datos.';
+  });
 });
 
-// Ejemplo de función de renderizado:
-// Puedes adecuar este código
+
 function renderCharacters(characters) {
   dataContainer.innerHTML = '';
-  characters.forEach(character => {
-    const characterElement = document.createElement('div');
-    characterElement.innerHTML = `
-      <h3>${character.name}</h3>
-      <img src="${character.image}" alt="${character.name}">
+  characters.results.forEach(character =>{
+    const characterHTML = `
+    <div class="character-card">
+    <h2>${character.name}</h2>
+    <p><strong>Status:</strong> ${character.status}</p>
+    <p><strong>Species:</strong> ${character.species}</p>
+    <p><strong>Gender:</strong> ${character.gender}</p>
+    <img src="${character.image}" alt="${character.name}">
+    <button class="show-details-btn">Show More Details</button>
+    <div class="details-container" style="display: none;">
+    <h3>Episodes</h3>
+    <ul>
+    ${character.episode.map(episodeUrl => `<li><a href="${episodeUrl}" target="_blank">${episodeUrl.split('/').pop()}</a></li>`).join('')}
+    </ul>
+    <hr>
+    <p><strong>Origin:</strong> ${character.origin.name}</p>
+    <p><strong>Location:</strong> ${character.location.name}</p>
+    </div>
+    </div>
     `;
-    dataContainer.appendChild(characterElement);
+    
+    dataContainer.insertAdjacentHTML('beforeend', characterHTML);
+    
   });
 }
+
+document.querySelectorAll('.show-details-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const detailsContainer = button.parentElement.querySelector('.details-container');
+        detailsContainer.style.display = detailsContainer.style.display === 'block' ? 'none' : 'block';
+    });
+});

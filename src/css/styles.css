@@ -1,0 +1,107 @@
+/* Variables */
+:root {
+    --primary-color: #FFC600; /* A vibrant yellow like Rick's signature color */
+    --secondary-color: #34495E; /* A dark gray akin to Morty's hair */
+    --text-color: #333;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Body and Container */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: var(--text-color);
+    background-color: #F2F2F2;
+}
+
+header, footer {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    /* Tablet Style */
+    h1 {
+        font-size: 1.5rem;
+    }
+    button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile Style */
+    h1 {
+        font-size: 1.2rem;
+    }
+    button {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
+/* Main Section Styles */
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    box-shadow: var(--box-shadow);
+}
+
+#data-container {
+    margin-top: 2rem;
+}
+
+/* Buttons Style */
+#fetch-btn, #axios-btn {
+    background: none;
+    border: 2px solid var(--primary-color);
+    padding: 1rem 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+#fetch-btn:hover, #axios-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Example character card (you can customize this based on your data structure) */
+.character-card {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.character-card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.character-card p {
+    margin: 0.5rem 0;
+}
+.details-container {
+    margin-top: 1rem;
+    background: white;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.details-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details-container li {
+    margin-bottom: 0.5rem;
+}
